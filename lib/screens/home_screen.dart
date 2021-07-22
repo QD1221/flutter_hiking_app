@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-class HomeScreen extends StatefulWidget {
+Color hikingGreenColor = Color(0xff297653);
 
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -11,55 +12,144 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _bottomIndex = 0;
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
+  List<Widget> widgetItems = [
+    SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.centerLeft,
                     child: IconButton(
                       onPressed: () {},
                       icon: Icon(
                         Icons.apps,
                       ),
-                      color: Colors.grey,
+                      color: hikingGreenColor,
                     ),
                   ),
-                  Expanded(
-                    flex: 4,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.location_on,
-                          color: Colors.green,
-                        ),
-                        Text(
-                          'Carpathians, Ukraine',
-                        ),
-                      ],
+                ),
+                Expanded(
+                  flex: 6,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        color: hikingGreenColor,
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        'Carpathians, Ukraine',
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Container(
+                      height: 42,
+                      width: 42,
+                      decoration: BoxDecoration(
+                          color: hikingGreenColor,
+                          borderRadius: BorderRadius.circular(4)),
                     ),
                   ),
-                  Expanded(
-                    child: Center(
-                      child: Container(
-                        height: 42,
-                        width: 42,
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(4)),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              child: Text(
+                'Let\'s go hiking, Alina!',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              height: 52,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+                borderRadius: BorderRadius.circular(4),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    icon: Icon(Icons.search),
+                    hintText: 'Search your location'),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 24),
+              child: Text('Choose your skill level'),
+            ),
+            SizedBox(
+              height: 36,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: hikingGreenColor,
+                        borderRadius: BorderRadius.circular(4)),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Text(
+                      'Easy',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(4)),
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      child: Text(
+                        'Medium',
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                     ),
                   ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(4)),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Text(
+                      'Hard',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                  )
                 ],
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
+      ),
+    ),
+    Container(
+      color: Colors.blue,
+    ),
+    Container(
+      color: hikingGreenColor,
+    )
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: widgetItems.elementAt(_bottomIndex),
       ),
       bottomNavigationBar: BottomAppBar(
         child: Container(
@@ -79,11 +169,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      _bottomIndex == 0 ?
-                          Icons.home :
-                      LineIcons.home,
+                      _bottomIndex == 0 ? Icons.home : LineIcons.home,
                       size: 32,
-                      color: _bottomIndex == 0 ? Colors.green : Colors.grey,
+                      color: _bottomIndex == 0 ? hikingGreenColor : Colors.grey,
                     ),
                     SizedBox(
                       height: 4,
@@ -92,8 +180,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 3,
                       width: 24,
                       decoration: BoxDecoration(
-                        color: _bottomIndex == 0 ? Colors.green : Colors.white,
-
+                        color:
+                            _bottomIndex == 0 ? hikingGreenColor : Colors.white,
                       ),
                     )
                   ],
@@ -109,11 +197,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      _bottomIndex == 1 ?
-                      Icons.location_on :
-                      LineIcons.mapMarker,
+                      _bottomIndex == 1
+                          ? Icons.location_on
+                          : LineIcons.mapMarker,
                       size: 32,
-                      color: _bottomIndex == 1 ? Colors.green : Colors.grey,
+                      color: _bottomIndex == 1 ? hikingGreenColor : Colors.grey,
                     ),
                     SizedBox(
                       height: 4,
@@ -122,8 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 3,
                       width: 24,
                       decoration: BoxDecoration(
-                        color: _bottomIndex == 1 ? Colors.green : Colors.white,
-
+                        color:
+                            _bottomIndex == 1 ? hikingGreenColor : Colors.white,
                       ),
                     )
                   ],
@@ -139,11 +227,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(
-                      _bottomIndex == 2 ?
-                      Icons.favorite :
-                      LineIcons.heart,
+                      _bottomIndex == 2 ? Icons.favorite : LineIcons.heart,
                       size: 32,
-                      color: _bottomIndex == 2 ? Colors.green : Colors.grey,
+                      color: _bottomIndex == 2 ? hikingGreenColor : Colors.grey,
                     ),
                     SizedBox(
                       height: 4,
@@ -152,8 +238,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 3,
                       width: 24,
                       decoration: BoxDecoration(
-                        color: _bottomIndex == 2 ? Colors.green : Colors.white,
-
+                        color:
+                            _bottomIndex == 2 ? hikingGreenColor : Colors.white,
                       ),
                     )
                   ],
