@@ -114,7 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       decoration: BoxDecoration(
                           color: Colors.grey[300],
                           borderRadius: BorderRadius.circular(4)),
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                       child: Text(
                         'Medium',
                         style: TextStyle(fontSize: 16, color: Colors.white),
@@ -132,6 +133,93 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   )
                 ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Select your trail'),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.tune_outlined),
+                  color: Colors.grey,
+                )
+              ],
+            ),
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              children: List.generate(
+                10,
+                (index) => Container(
+                  decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(4),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://cdn.pixabay.com/photo/2016/11/20/08/17/squirrel-1842152__340.jpg'),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                top: 8,
+                                right: 8,
+                                child: IconButton(
+                                  color: Colors.white,
+                                  onPressed: () {},
+                                  icon: Icon(Icons.favorite),
+                                ))
+                          ],
+                        ),
+                        flex: 6,
+                      ),
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(color: Colors.grey[300]),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Text(
+                                  'Tagidna',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'Easy',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  Text(
+                                    '7 h',
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                  Text(
+                                    '15 km',
+                                    style: TextStyle(color: Colors.grey),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        flex: 4,
+                      ),
+                    ],
+                  ),
+                ),
               ),
             )
           ],
